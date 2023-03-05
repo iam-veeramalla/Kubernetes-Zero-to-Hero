@@ -3,13 +3,13 @@
 As DevSecOps engineers, one of the primary resposibilities is to maintain security of your Kubernetes clusters and the containers.
 Here are some of the mandatory things to consider.
 
-1. [Secure your API server](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/edit/main/Security/Manage_Security_Like_Pro.md#secure-your-api-server)
-2. [RBAC](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/edit/main/Security/Manage_Security_Like_Pro.md#rbac)
-3. [Network Policies](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/edit/main/Security/Manage_Security_Like_Pro.md#network-policies)
-4. [Encrypt data at rest](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/edit/main/Security/Manage_Security_Like_Pro.md#encrypt-data-at-rest)
-5. [Secure Container Images](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/edit/main/Security/Manage_Security_Like_Pro.md#secure-container-images)
-6. [Cluster Monitoring](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/edit/main/Security/Manage_Security_Like_Pro.md#cluster-monitoring)
-7. [Upgrades](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/edit/main/Security/Manage_Security_Like_Pro.md#upgrades)
+1. [Secure your API server](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#secure-your-api-server)
+2. [RBAC](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#rbac)
+3. [Network Policies](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#network-policies)
+4. [Encrypt data at rest](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#encrypt-data-at-rest)
+5. [Secure Container Images](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#secure-container-images)
+6. [Cluster Monitoring](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#cluster-monitoring)
+7. [Upgrades](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#upgrades)
 
 ## Secure your API server
 The Kubernetes API server is a critical component of the cluster and should be secured with strong authentication and authorization mechanisms. 
