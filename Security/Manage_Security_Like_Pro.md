@@ -117,8 +117,8 @@ Make sure to keep the Kubernetes API server up to date with the latest security 
 By following these steps, you can enhance the security of the Kubernetes API.
 
 ## RBAC
-Use Role-Based Access Control to define who can access the Kubernetes API and what actions they are allowed to perform. 
-Use strong authentication methods like multi-factor authentication and enforce password policies.
+Use Role-Based Access Control to define who can access which resource in kubernetes. For example, not everyone should have access to kubernetes secrets.
+
 
 ## Network Policies
 Use network policies to restrict traffic within the cluster and to/from external sources. 
@@ -126,6 +126,71 @@ Use firewalls and security groups to control traffic to and from the cluster.
 
 ## Encrypt data at rest
 Use encryption to protect sensitive data stored in etcd and other components of the cluster.
+
+To encrypt data at rest in Kubernetes, you can use the Kubernetes Encryption Provider feature, which encrypts sensitive data stored in etcd, the Kubernetes cluster's key-value store. The Encryption Provider uses a key management system to manage and store encryption keys.
+
+Here are the general steps to enable Encryption Provider and encrypt data at rest in Kubernetes:
+
+- [Enable the Encryption Provider feature by configuring the Kubernetes API server](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#enable-the-encryption-provider-feature-by-configuring-the-kubernetes-api-server)
+- [Configure the key management system to store and manage encryption keys](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#configure-the-key-management-system-to-store-and-manage-encryption-keys)
+- [Create a Kubernetes Secret object with the encryption key](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#create-a-kubernetes-secret-object-with-the-encryption-key)
+- [Configure Kubernetes resources to use the Encryption Provider](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#configure-kubernetes-resources-to-use-the-encryption-provider)
+
+Let's dive into these steps in more detail:
+
+#### Enable the Encryption Provider feature by configuring the Kubernetes API server.
+
+You can enable the Encryption Provider feature by adding the --encryption-provider-config option to the Kubernetes API server command-line arguments or to the API server manifest file. This option points to a configuration file that specifies the encryption provider and its settings.
+
+Here is an example of a simple encryption provider configuration file:
+
+```
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+  - resources: ["secrets"]
+    providers:
+      - identity: {}
+```
+
+In this example, we are enabling the Encryption Provider for Secrets resources using the "identity" provider, which uses a default encryption algorithm and key size.
+
+#### Configure the key management system to store and manage encryption keys.
+
+The Encryption Provider requires a key management system to store and manage encryption keys. You can use a cloud-based key management system like Google Cloud KMS or Amazon Web Services KMS, or a self-hosted key management system like HashiCorp Vault.
+
+You must configure the key management system to generate a key and give the Kubernetes API server access to the key. The specific steps to do this depend on the key management system you are using.
+
+#### Create a Kubernetes Secret object with the encryption key.
+
+Once you have a key from your key management system, you can create a Kubernetes Secret object that stores the key. You can create the Secret object using kubectl:
+
+`kubectl create secret generic encryption-key --from-literal=encryption-key=<base64-encoded-key>`
+
+In this example, we are creating a Secret object called "encryption-key" and storing the key as a base64-encoded literal.
+
+#### Configure Kubernetes resources to use the Encryption Provider.
+
+To use the Encryption Provider to encrypt data at rest, you need to configure Kubernetes resources to use the feature. You can do this by setting the encryptionConfig field in the Kubernetes API server manifest file or by setting the metadata.annotations field in the Kubernetes resource definition.
+
+Here is an example of a Kubernetes Secret definition that uses the Encryption Provider:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+  annotations:
+    encryptionConfig: secrets
+type: Opaque
+data:
+  username: <base64-encoded-username>
+  password: <base64-encoded-password>
+```
+
+In this example, we are defining a Secret object called "my-secret" that contains sensitive data. We are setting the metadata.annotations field to specify that the Encryption Provider should be used to encrypt the data. The data field contains the sensitive data, which is base64-encoded.
+
+By following these steps, you can enable and configure the Kubernetes Encryption Provider feature to encrypt data at rest in your Kubernetes cluster.
 
 ## Secure Container Images
 Use container images from trusted sources and scan them for vulnerabilities before deployment.
