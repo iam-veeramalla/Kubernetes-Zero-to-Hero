@@ -74,7 +74,7 @@ kops create cluster --name=demok8scluster.k8s.local --state=s3://kops-abhi-stora
 ### Important: Edit the configuration as there are multiple resources created which won't fall into the free tier.
 
 ```
-kops edit cluster myfirstcluster.k8s.local
+kops edit cluster demok8scluster.k8s.local --state=s3://kops-abhi-storage
 ```
 
 Step 12: Build the cluster
