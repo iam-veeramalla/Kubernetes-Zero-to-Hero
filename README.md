@@ -85,9 +85,18 @@ kops update cluster demok8scluster.k8s.local --yes --state=s3://kops-abhi-storag
 
 This will take a few minutes to create............
 
+
+
 After a few mins, run the below command to verify the cluster installation.
 
 ```
 kops validate cluster demok8scluster.k8s.local
 ```
+
+
+
+############### for delete cluster #####################
+
+
+kops delete cluster --name demok8scluster.k8s.local --yes
 
