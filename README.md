@@ -7,6 +7,7 @@ Creating this repo with an intent to make Kubernetes easy for begineers. This is
 
 Dependencies required 
 
+
 1. Python3
 2. AWS CLI
 3. kubectl
