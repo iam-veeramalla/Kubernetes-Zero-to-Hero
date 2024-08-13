@@ -1,7 +1,7 @@
 Kubernetes Multi Node Cluster Set-up Step By Step
 https://kind.sigs.k8s.io/docs/user/quick-start/#installation realease notes/ look for realease version node according today
 
-Installation of Kubectl on Ubuntu
+Installation of Kubectl & KIND on Ubuntu
 
 sudo apt update
 
