@@ -91,3 +91,8 @@ After a few mins, run the below command to verify the cluster installation.
 kops validate cluster demok8scluster.k8s.local
 ```
 
+### For Org Specific Domain instead of Local domain
+
+```
+aws route53 create-hosted-zone --name=dev.example.com caller-reference 1
+```
