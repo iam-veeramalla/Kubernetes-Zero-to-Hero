@@ -91,3 +91,35 @@ After a few mins, run the below command to verify the cluster installation.
 kops validate cluster demok8scluster.k8s.local
 ```
 
+# Deploy Wordpress application in Kops Cluster via Helm
+
+Add Repo Bitnami from Helm online Repository
+
+1. helm repo add bitnami https://charts.bitnami.com/bitnami
+
+Update the Repo :-
+
+2. helm repo update
+
+Configure MySQL with authorizing the password
+
+3. helm install wordpress-db bitnami/mysql --set auth.rootPassword=my-secret-pw
+
+List the kubernetes pods
+
+4. kubernetes get pods
+
+Next, deploy WordPress using Helm.
+
+5. helm install wordpress bitnami/wordpress \
+  --set wordpressDatabase.host=wordpress-db-mysql \
+  --set wordpressDatabase.password=my-secret-pw
+
+6. Expose Wordpress to web
+
+   kubectl get svc
+
+7. Copy the LB address and navigate to browser and you will find the Wordpress app running
+
+
+
