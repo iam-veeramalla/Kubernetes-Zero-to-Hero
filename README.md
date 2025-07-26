@@ -25,6 +25,17 @@ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/
 sudo apt-get update
 sudo apt-get install -y python3-pip apt-transport-https kubectl
 ```
+# 1. Download the latest version of kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+# 2. Make it executable
+chmod +x kubectl
+
+# 3. Move it to a directory in your PATH
+sudo mv kubectl /usr/local/bin/
+
+# 4. Verify installation
+kubectl version --client
 
 ```
 pip3 install awscli --upgrade
