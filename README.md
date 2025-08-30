@@ -13,23 +13,34 @@ Dependencies required
 
 ###  Install dependencies
 
+
+Add the new Kubernetes repository:
 ```
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl apt-transport-https
+
 ```
 
 ```
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+```
+
+```
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
 
 ```
 sudo apt-get update
-sudo apt-get install -y python3-pip apt-transport-https kubectl
-```
+sudo apt-get install -y kubectl
 
 ```
-pip3 install awscli --upgrade
-```
 
+Install AWS CLI (Ubuntu 24.04 compatible):
+
+```
+sudo snap install aws-cli --classic
+```
 ```
 export PATH="$PATH:/home/ubuntu/.local/bin/"
 ```
