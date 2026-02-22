@@ -99,6 +99,7 @@ This will take a few minutes to create............
 After a few mins, run the below command to verify the cluster installation.
 
 ```
-kops validate cluster demok8scluster.k8s.local
+kops validate cluster demok8scluster.k8s.local --state s3://<bucket>
 ```
+Need to specify the state store to enable the Kops to validate your cluster adn check if the cluster is created and healthy
 
