@@ -34,6 +34,12 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo apt-get update
 sudo apt-get install -y kubectl
 
+#incase sudoapt-get install -y kubectl does not work then use below commands
+
+
+sudo snap install kubectl --classic
+kubectl version --client
+
 ```
 
 Install AWS CLI (Ubuntu 24.04 compatible):
