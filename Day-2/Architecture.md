@@ -17,8 +17,9 @@ Kubernets Architecture divide into 2 parts:
 * in k8s the lowest level of deployment is POD. Pod is just like a wraper to our container with advances features.
 
 
-1. Control plain components:
-   -------------------------
+Control plain components:
+-------------------------
+
 
 API-server:
 ----------
@@ -89,11 +90,71 @@ It checks several things:
 
 
 
-    3. ECTD:
-       -----
-       * It will acts like DB of our K8s cluster.
-       * it will store in Key=value pair.
-    
+ECTD:
+-----
+  
+* It will acts like DB of our K8s cluster.
+* it will store in Key=value pair.
+
+What is etcd?
+
+      Think of etcd as the database of Kubernetes.
+
+Kubernetes stores its cluster state in etcd, including:
+
+      - Pod information
+      - Deployment configurations
+      - Services
+      - ConfigMaps
+      - Secrets
+      - Node information
+      - Cluster configuration and state
+
+How etcd works:
+
+<img width="961" height="362" alt="image" src="https://github.com/user-attachments/assets/8d96db70-b529-40e5-b96c-548100494d3c" />
+
+For example, when you execute:
+
+      kubectl create deployment nginx --image=nginx
+
+
+* The API server processes the request and Kubernetes persists the desired state in etcd.
+* The controllers then work to make the actual cluster state match the desired state.
+
+<img width="887" height="620" alt="image" src="https://github.com/user-attachments/assets/4a609773-e7bf-42d6-9356-4648923a04ab" />
+
+What happens if etcd has a problem?
+
+* Imagine your EKS etcd database becomes unavailable.
+
+Possible consequences:
+
+      1. kubectl get pods may fail because the API server cannot retrieve cluster state.
+      2. You may not be able to create new Deployments.
+      3. You may not be able to scale applications.
+      4. Kubernetes may not be able to persist updated resource states.
+
+
+Will existing Pods immediately stop running?
+
+      No. Existing workloads can continue running on worker nodes for some time because the containers are already running.
+
+However, Kubernetes management and reconciliation can be affected.
+
+This is an important production interview question.
+
+How do we monitor etcd in EKS?
+
+As a DevOps engineer, you should understand these metrics:
+
+<img width="996" height="346" alt="image" src="https://github.com/user-attachments/assets/e4e8689c-2b42-4fa5-92d7-a2fb26ab6c1d" />
+
+
+
+
+
+
      4. Controller Manager:
         ------------------
         * Controller Manager is the brain that watches and fixes things inside the cluster.
