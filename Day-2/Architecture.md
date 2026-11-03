@@ -155,35 +155,38 @@ As a DevOps engineer, you should understand these metrics:
 
 
 
-     4. Controller Manager:
-        ------------------
-        * Controller Manager is the brain that watches and fixes things inside the cluster.
+Controller Manager:
+------------------
+       
+* Controller Manager is the brain that watches and fixes things inside the cluster.
 
-        * It runs many controllers.
+ * It runs many controllers.
 
-        📌 Think of it like a supervisor 👨‍💼
+📌 Think of it like a supervisor 👨‍💼
 
             Watches everything
 
             Takes action when something is wrong
 
-      🔁 What does Controller Manager do?
+ 🔁 What does Controller Manager do?
 
-          It continuously:
+ It continuously:
 
            Checks current state
 
            Compares with desired state
 
-      Takes action to fix it
-   🧩 Important Controllers inside Controller Manager
-  🔹 Node Controller
+            Takes action to fix it
+ 
+🧩 Important Controllers inside Controller Manager
+
+🔹 Node Controller
 
        Checks node health
 
        If a node goes down → marks it NotReady
 
-  🔹 ReplicaSet Controller
+🔹 ReplicaSet Controller
 
       Ensures correct number of pods
 
@@ -193,13 +196,13 @@ As a DevOps engineer, you should understand these metrics:
 
       One pod crashes → creates a new pod
 
-   🔹 Deployment Controller
+🔹 Deployment Controller
 
         Handles rolling updates
 
         Ensures zero downtime deployments
 
-  🔹 Job / CronJob Controller
+🔹 Job / CronJob Controller
 
       Runs jobs
 
