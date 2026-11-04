@@ -206,12 +206,12 @@ Controller Manager:
 
       Runs jobs
 
-  5. Cloud Controller Manager
-     ------------------------
+Cloud Controller Manager
+------------------------
 
-     Cloud Controller Manager handles cloud-specific tasks only.
+* Cloud Controller Manager handles cloud-specific tasks only.
 
-     It talks to:
+It talks to:
 
          Cloud APIs
 
@@ -221,51 +221,52 @@ Controller Manager:
 
           Cloud networking
 
-  🧩 What Cloud Controller Manager controls?
-      🔹 Node Controller (Cloud version)
+🧩 What Cloud Controller Manager controls?
+      
+🔹 Node Controller (Cloud version)
 
            Detects when cloud VM is deleted
 
            Removes node from cluster
 
-  🔹 Service Controller
+🔹 Service Controller
 
        Creates cloud Load Balancer
 
-   Example:
+Example:
 
        type: LoadBalancer
 
 
-  Automatically creates AWS ELB / Azure LB / GCP LB
+Automatically creates AWS ELB / Azure LB / GCP LB
 
-   🔹 Route Controller
+🔹 Route Controller
 
         Manages cloud routing rules
 
-   🔹 Volume Controller
+🔹 Volume Controller
 
        Attaches / detaches cloud disks
 
        Example: EBS, Azure Disk, Persistent Disk
 
-   🧠 Easy way to remember
+🧠 Easy way to remember
 
-   🧠 Controller Manager
+🧠 Controller Manager
 
     “Fixes Kubernetes things”
 
-   ☁️ Cloud Controller Manager
+☁️ Cloud Controller Manager
 
        “Talks to the cloud”
 
-   🏢 Enterprise understanding (simple)
+🏢 Enterprise understanding (simple)
 
       Controller Manager = core Kubernetes logic
 
       Cloud Controller Manager = cloud integration layer
 
-  Separation improves:
+Separation improves:
 
     Portability
 
@@ -274,7 +275,7 @@ Controller Manager:
     Cloud neutrality
 
 
-  🏁 One-line summary
+🏁 One-line summary
 
      👉 Controller Manager keeps the cluster healthy
      👉 Cloud Controller Manager connects Kubernetes to the cloud
@@ -282,8 +283,9 @@ Controller Manager:
 
 
     
-2 . Data plain components:
-   ----------------------
+Data plain components:
+----------------------
+
    
 Kubelet:
 --------
