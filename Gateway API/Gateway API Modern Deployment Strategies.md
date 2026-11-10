@@ -4,39 +4,44 @@ One of the MOST powerful features of Gateway API is 🚀☸️
 ---------------------------------
 Because deploying a new application version directly to production can be risky 😬
 What if:
-💥 The new version has bugs?
-💥 Performance drops?
-💥 Users start reporting issues?
+
+    💥 The new version has bugs?
+    💥 Performance drops?
+    💥 Users start reporting issues?
 
 That's why modern Kubernetes platforms use deployment strategies like:
 -------------------------------------------------------------------------
-🔄 Rolling Update
-🐤 Canary Deployment
-🟦🟩 Blue-Green Deployment
-🚦 Traffic Splitting (A/B Testing)
+
+    🔄 Rolling Update
+    🐤 Canary Deployment
+    🟦🟩 Blue-Green Deployment
+    🚦 Traffic Splitting (A/B Testing)
 And Gateway API makes them much easier to implement.
 
 💡 Why Gateway API for Deployments?
 -------------------------------------
 Gateway API allows traffic to be intelligently routed between multiple application versions using:
- backendRefs:
- and
- weight:
+
+    backendRefs:
+    and
+    weight:
 This enables:
-✅ Controlled Releases
-✅ Safer Deployments
-✅ Easy Rollbacks
-✅ User Testing
+
+    ✅ Controlled Releases
+    ✅ Safer Deployments
+    ✅ Easy Rollbacks
+    ✅ User Testing
 
 🧠 Quick Interview Revision
 ----------------------------------
-🔄 Rolling Update → Replace Pods Gradually
-🚦 Traffic Splitting → Multiple Versions Simultaneously
-🟦🟩 Blue-Green → Switch Entire Environment
-🐤 Canary → Gradual Traffic Shift
-⚖️ backendRefs.weight → Controls Traffic Percentage
-🔙 Rollback → Restore Previous Version
-🚀 Rollout → Deploy New Version
+
+    🔄 Rolling Update → Replace Pods Gradually
+    🚦 Traffic Splitting → Multiple Versions Simultaneously
+    🟦🟩 Blue-Green → Switch Entire Environment
+    🐤 Canary → Gradual Traffic Shift
+    ⚖️ backendRefs.weight → Controls Traffic Percentage
+    🔙 Rollback → Restore Previous Version
+    🚀 Rollout → Deploy New Version
 
 🎯 One-Line Interview Answer
 👉 Gateway API enables advanced deployment strategies such as Traffic Splitting, Canary Deployments, and Blue-Green Deployments by using weighted routing through HTTPRoute backendRefs, allowing safe, controlled, and zero-downtime application releases.
