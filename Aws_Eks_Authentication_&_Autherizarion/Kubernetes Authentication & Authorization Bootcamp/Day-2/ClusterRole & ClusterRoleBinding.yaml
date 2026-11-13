@@ -1,0 +1,276 @@
+📅 Day 2 — ClusterRole & ClusterRoleBinding
+==============================================
+Goal
+-----
+By the end of today, you will understand:
+
+Why Role is not enough
+What ClusterRole is
+What ClusterRoleBinding is
+Cluster-scoped vs Namespace-scoped resources
+Real production RBAC design
+
+
+2. Limitation of Role
+---------------------
+Suppose the developer now wants to see cluster nodes.
+
+kubectl get nodes
+
+Output:
+
+Error from server (Forbidden)
+
+Why?
+
+Because Nodes are not inside a namespace.
+
+They belong to the entire Kubernetes cluster.
+
+Role cannot grant access to cluster-wide resources.
+
+
+3. Namespace vs Cluster Resources
+-----------------------------------
+Namespace Resources
+--------------------
+Pods
+Services
+Deployments
+ConfigMaps
+Secrets
+PVC
+Jobs
+
+These exist inside a namespace.
+
+Example:
+
+Namespace
+----------
+dev
+ ├── Pod
+ ├── Service
+ └── ConfigMap
+
+ 
+Cluster Resources
+----------------
+Nodes
+Namespaces
+PersistentVolumes
+StorageClasses
+ClusterRoles
+ClusterRoleBindings
+CustomResourceDefinitions (CRDs)
+
+These belong to the whole cluster.
+
+Example:
+
+Kubernetes Cluster
+-------------------
+├── Node-1
+├── Node-2
+├── Namespace dev
+├── Namespace qa
+└── Namespace prod
+
+4. What is ClusterRole?
+-----------------------
+
+A ClusterRole defines permissions for cluster-scoped resources or permissions that can be reused across namespaces.
+
+Example:
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+
+metadata:
+  name: node-reader
+
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  verbs:
+  - get
+  - list
+
+
+
+Meaning:
+
+Can:
+
+✔ Get Nodes
+
+✔ List Nodes
+
+
+5. ClusterRole Does Nothing Alone
+-----------------------------------
+Just like a Role, a ClusterRole is only a set of permissions.
+
+Nothing can use it until it is bound.
+
+6. ClusterRoleBinding
+---------------------
+
+Now bind it.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+
+metadata:
+  name: node-reader-binding
+
+subjects:
+
+- kind: ServiceAccount
+  name: developer
+  namespace: dev
+
+roleRef:
+
+  kind: ClusterRole
+
+  name: node-reader
+
+  apiGroup: rbac.authorization.k8s.io
+
+
+Flow:
+
+ServiceAccount
+developer
+       │
+       ▼
+ClusterRoleBinding
+       │
+       ▼
+ClusterRole
+       │
+       ▼
+Can Get/List Nodes
+
+
+7. Test It
+-----------
+
+Before ClusterRoleBinding:
+
+kubectl auth can-i get nodes \
+--as=system:serviceaccount:dev:developer
+
+Output:
+
+no
+
+After applying the ClusterRoleBinding:
+
+kubectl auth can-i get nodes \
+--as=system:serviceaccount:dev:developer
+
+Output:
+
+yes
+
+
+8. Real Production Example
+--------------------------
+
+Suppose you have:
+
+Developer ServiceAccount
+
+Requirements:
+
+✔ Create Pods
+
+✔ Read Services
+
+✔ Read ConfigMaps
+
+✔ View Nodes
+
+Solution:
+
+Role
+      │
+      ▼
+Pods
+Services
+ConfigMaps
+
++
+
+ClusterRole
+      │
+      ▼
+Nodes
+
+Then bind:
+
+ServiceAccount
+
+↓
+
+RoleBinding
+
+↓
+
+Role
+
+AND
+
+↓
+
+ClusterRoleBinding
+
+↓
+
+ClusterRole
+
+
+
+The ServiceAccount now has both namespace-level and cluster-level permissions.
+
+9. Role vs ClusterRole
+----------------------
+| Feature           | Role          | ClusterRole    |
+| ----------------- | ------------- | -------------- |
+| Scope             | One Namespace | Entire Cluster |
+| Pods              | ✅             | ✅              |
+| Services          | ✅             | ✅              |
+| Nodes             | ❌             | ✅              |
+| Namespaces        | ❌             | ✅              |
+| PersistentVolumes | ❌             | ✅              |
+
+
+10. RoleBinding vs ClusterRoleBinding
+-------------------------------------
+| Feature     | RoleBinding                              | ClusterRoleBinding            |
+| ----------- | ---------------------------------------- | ----------------------------- |
+| Scope       | Namespace                                | Cluster                       |
+| Binds       | Role (or ClusterRole within a namespace) | ClusterRole                   |
+| Typical Use | Application teams                        | Cluster admins/platform teams |
+
+
+
+📝 Today's Hands-on Tasks
+----------------------------
+Create a ClusterRole named node-reader.
+Allow:
+get
+list
+on nodes.
+Create a ClusterRoleBinding.
+Bind it to the developer ServiceAccount in the dev namespace.
+Verify with:
+kubectl auth can-i get nodes \
+--as=system:serviceaccount:dev:developer
+
+Expected output:
+
+yes

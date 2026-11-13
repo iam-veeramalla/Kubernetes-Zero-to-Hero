@@ -1,0 +1,46 @@
+Task Details ☕️
+--------------
+Document what you learned from the video in a blog, embed the video, and include all the references in the blog.
+Task 1
+-------
+Create a pod using the imperative command and use nginx as the image
+
+Cmd: kubectl run pod_name --image=nginx:lates
+Task2
+------
+Create the YAML from the nginx pod created in task 1
+cmd: kubectl run task_1_pod_name --image:nginx:latest -o yaml
+
+Update the pod name in the YAML
+cmd: kubectl run nginx-pod --image=nginx:latest --dry-run=client -o yaml > new_pod.yaml
+
+Use that YAML to create a new pod with the name nginx-new.
+cmd: kubectl create -f  new_pod.yaml
+
+Task3
+-----
+Apply the below YAML and fix the errors, including all the commands that you run during the troubleshooting and the error message
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: test
+  name: redis
+spec:
+  containers:
+  - image: rediss
+    name: redis
+
+To enter into a Pod:
+-------------------
+kubectl exec -it pod_name -c cont_name -- bash -il
+
+    
+Share your learnings: Document your key takeaways and insights in a blog post and social media update
+Make it public: Share what you learn publicly on LinkedIn or Twitter.
+Tag us and use the hashtag: Include the following in your post:
+Tag @PiyushSachdeva and @CloudOps Community (on both platforms)
+Use the hashtag #40daysofkubernetes
+Embed the video: Enhance your blog post by embedding the video lesson from the Kubernetes series. This will provide visual context and reinforce your written explanations.
+Blog Post Focus 📝
+Clarity is essential: Write your blog post clearly and concisely, making it easy for anyone to grasp the concepts, regardless of their prior Kubernetes experience.

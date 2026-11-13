@@ -1,0 +1,30 @@
+Kubernets is Easy...
+
+containers have Ephemeral (short life objects)
+
+Diff B/W docker and kubernets ?
+
+Docker:
+--------
+Docker is container Platform.
+Docker have a single host. if any one of the container will consume more memory / cpu it causes another container to kill.
+it will not have auto heal capabulity.
+it will not support auto scaling.
+it will not support Enterpisees standerds.
+Enterpisees standerds:
+1.firewall
+2.load balancing
+API gateway
+
+
+Kubernets:
+----------
+kubernets id Container orchestration platform
+it will support auto healing
+it will support auto scalling
+it will support entrpriess level 
+it will support multi node cluster.
+
+
+
+
