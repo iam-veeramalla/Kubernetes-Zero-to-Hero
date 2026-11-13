@@ -53,5 +53,36 @@ That's exactly what NetworkPolicy does.
 
 🔐 Best Practice → Deny All First, Then Allow Required Traffic
 
+
+What is ipBlock?
+
+* Sometimes you want to allow traffic based on an IP range instead of Pod labels.
+
+* For example, allow traffic from:
+
+      10.0.0.0/16
+
+      ingress:
+        - from:
+            - ipBlock:
+                cidr: 10.0.0.0/16
+          ports:
+            - protocol: TCP
+              port: 8080
+
+* This allows matching traffic from the specified IP range, subject to the network plugin's NetworkPolicy implementation.
+
+* You can also exclude a smaller range using except:
+
+      ipBlock:
+        cidr: 10.0.0.0/16
+        except:
+          - 10.0.5.0/24
+
+
+* This excludes 10.0.5.0/24 from the allowed CIDR
+
+You can use:
+
 🎯 One-Line Interview Answer
 👉 NetworkPolicy is a Kubernetes resource that controls Pod-to-Pod communication by defining ingress and egress rules, enabling microservice isolation, zero-trust networking, and least-privilege security.
